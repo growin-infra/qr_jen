@@ -1,6 +1,7 @@
 node {
 	stage ('ls test') {
 	    sh "ls /app/growin/was/"
+	    sh "whoami"
 	}
     dir ('/app/growin/was/growin11') {
 	    stage ('git clone') {
