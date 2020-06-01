@@ -11,38 +11,37 @@ Build & run
 
 **Prerequisites:**
 
-* Java 14
+* Java 18
 * Apache Maven (https://maven.apache.org/)
+* External tomcat 8.0
 
 Application properties can be configured in
 
 ```bash
-qr-code-generator/src/main/resources
+/qr_jen/src/main/resources/application.properties
 ```
 
 Use
 
 ```bash
-mvn clean install
+Run as > Maven Clean
 ```
 to build the application and
 
 ```bash
-java -jar target/qrcode-generator-1.0.0-SNAPSHOT.jar
-```
-
-or 
-
-```bash
-mvn spring-boot:run
+Run as > Maven Bulid
 ```
 
 to run it on your development machine.
 
+```bash
+Tomcat 8.0
+```
+
 Point your browser to 
 
 ```bash
-http://localhost:8080
+http://localhost:8180
 ```
 
 
