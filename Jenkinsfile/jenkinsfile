@@ -1,7 +1,4 @@
 node {
-    stage('swiching') {
-        sh "su - growin"
-    }
     dir ('/app/growin/was/growin11') {
 	    stage('git clone') {
             git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
