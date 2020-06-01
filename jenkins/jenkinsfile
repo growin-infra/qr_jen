@@ -1,0 +1,20 @@
+node {
+    stage('swiching') {
+        sh "su - growin"
+    }
+    dir ('/app/growin/was/growin11') {
+	    stage('git clone') {
+            git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
+        }
+	}
+    dir ('/svc/growin/was/tomcat/bin/') {
+	    stage ('tomcat restart') {
+		    sh "./shutdown.sh"
+			sh "sleep 5"
+		    sh "./startup.sh"
+		}
+	}
+    stage('Deploy') {
+        sh "echo 'Deply tomcat'"
+    }
+}
