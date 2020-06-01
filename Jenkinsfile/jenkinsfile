@@ -1,6 +1,9 @@
 node {
+	stage ('ls test') {
+	    sh "ls /app/growin/was/"
+	}
     dir ('/app/growin/was/growin11') {
-	    stage('git clone') {
+	    stage ('git clone') {
             git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
         }
 	}
@@ -11,7 +14,7 @@ node {
 		    sh "./startup.sh"
 		}
 	}
-    stage('Deploy') {
+    stage ('Deploy') {
         sh "echo 'Deply tomcat'"
     }
 }
