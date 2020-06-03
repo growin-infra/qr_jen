@@ -10,7 +10,7 @@ node {
 		    sh "mvn -version"
 		}
 	    stage ('maven package') {
-		    sh "mvn package"
+		    sh "mvn clean package"
 		}
 	}
     stage ('cp war') {
