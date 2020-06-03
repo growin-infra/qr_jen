@@ -14,19 +14,20 @@ node {
 		stage ('check maven') {
 		    mvnHome = tool 'maven'
 		    sh "'${mvnHome}/bin/mvn' -version"
+		    sh "mvn -version"
 		}
-	    //stage ('maven package') {
-		//    sh "'${mvnHome}/bin/mvn' clean package"
-		//}
+	    stage ('maven package') {
+		    sh "'${mvnHome}/bin/mvn' clean package"
+		}
 	}
-    //stage ('cp war') {
-    //    sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
-    //}
-    //dir ('/svc/growin/was/tomcat/bin') {
-	//    stage ('tomcat restart') {
-	//        sh "./shutdown.sh"
-	//        sh "sleep 5"
-	//        sh "./startup.sh"
-	//    }
-	//}
+    stage ('cp war') {
+        sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
+    }
+    dir ('/svc/growin/was/tomcat/bin') {
+	    stage ('tomcat restart') {
+	        sh "./shutdown.sh"
+	        sh "sleep 5"
+	        sh "./startup.sh"
+	    }
+	}
 }
