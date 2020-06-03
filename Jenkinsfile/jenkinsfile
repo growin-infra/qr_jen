@@ -3,11 +3,6 @@ node {
 	stage ('whoami') {
 	    sh "whoami"
 	}
-	stage ('check environment') {
-	    sh "M2_HOME=/usr/local/maven"
-	    sh "export PATH=${M2_HOME}/bin:${PATH}"
-	    sh "echo $PATH"
-	}
 	stage ('check maven') {
 	    mvnHome = tool 'M2'
 	    sh "'${mvnHome}/bin/mvn' -version"
