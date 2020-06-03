@@ -13,4 +13,9 @@ node {
 	    sh "'${mvnHome}/bin/mvn' -version"
 	    sh "mvn -version"
 	}
+    dir ('/downloads/maven/qr_jen') {
+	    stage ('git clone') {
+            git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
+        }
+	}
 }
