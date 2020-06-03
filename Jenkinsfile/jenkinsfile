@@ -14,7 +14,6 @@ node {
 		stage ('check maven') {
 		    mvnHome = tool 'maven'
 		    sh "'${mvnHome}/bin/mvn' -version"
-		    sh "mvn -version"
 		}
 	    stage ('maven package') {
 		    sh "'${mvnHome}/bin/mvn' clean package"
