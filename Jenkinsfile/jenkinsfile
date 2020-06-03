@@ -1,26 +1,16 @@
 node {
+    def mvnHome
 	stage ('whoami') {
 	    sh "whoami"
 	}
-    dir ('/downloads/maven/qr_jen') {
-	    stage ('git clone') {
-            git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
-        }
-		stage ('maven check') {
-		    sh "mvn -version"
-		}
-	    stage ('maven package') {
-		    sh "mvn clean package"
-		}
+	stage ('check environment') {
+	    sh "echo $PATH"
+	    sh "echo $M2_HOEM"
+	    sh "echo $JAVA_HOME"
 	}
-    stage ('cp war') {
-        sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
-    }
-    dir ('/svc/growin/was/tomcat/bin') {
-	    stage ('tomcat restart') {
-	        sh "./shutdown.sh"
-	        sh "sleep 5"
-	        sh "./startup.sh"
-	    }
+	stage ('check maven') {
+	    mvnHome = tool 'M2'
+	    sh "'${mvnHome}/bin/mvn' -version"
+	    sh "mvn -version"
 	}
 }
