@@ -4,7 +4,7 @@ node {
 	    sh "whoami"
 	}
 	stage ('check maven') {
-	    mvnHome = tool 'M2'
+	    mvnHome = tool 'M3'
 	    sh "'${mvnHome}/bin/mvn' -version"
 	    sh "mvn -version"
 	}
