@@ -1,4 +1,17 @@
 node {
+	withEnv(["JAVA_HOME=${ tool 'jdk1.8.0_144' }", "PATH+MAVEN=${tool 'maven'}/bin:${env.JAVA_HOME}/bin"]) {
+	
+	    // Apache Maven related side notes:
+	    // --batch-mode : recommended in CI to inform maven to not run in interactive mode (less logs)
+	    // -V : strongly recommended in CI, will display the JDK and Maven versions in use.
+	    //      Very useful to be quickly sure the selected versions were the ones you think.
+	    // -U : force maven to update snapshots each time (default : once an hour, makes no sense in CI).
+	    // -Dsurefire.useFile=false : useful in CI. Displays test errors in the logs directly (instead of
+	    //                            having to crawl the workspace files to see the cause).
+	    //sh "mvn --batch-mode -V -U -e clean deploy -Dsurefire.useFile=false"
+	    sh "java -version"
+	
+	}
     def mvnHome
     def javaHome
 	stage ('whoami') {
@@ -15,18 +28,23 @@ node {
 		    mvnHome = tool 'maven'
 		    sh "'${mvnHome}/bin/mvn' -version"
 		}
-	    stage ('maven package') {
-		    sh "'${mvnHome}/bin/mvn' clean package"
+		stage ('check java') {
+		    javaHome = tool 'jdk1.8.0_144'
+		    sh "'${javaHome}/bin/java' -version"
 		}
+		
+	    //stage ('maven package') {
+		//    sh "'${mvnHome}/bin/mvn' clean package"
+		//}
 	}
-    stage ('cp war') {
-        sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
-    }
-    dir ('/svc/growin/was/tomcat/bin') {
-	    stage ('tomcat restart') {
-	        sh "./shutdown.sh"
-	        sh "sleep 5"
-	        sh "./startup.sh"
-	    }
-	}
+    //stage ('cp war') {
+    //    sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
+    //}
+    //dir ('/svc/growin/was/tomcat/bin') {
+	//    stage ('tomcat restart') {
+	//        sh "./shutdown.sh"
+	//        sh "sleep 5"
+	//        sh "./startup.sh"
+	//    }
+	//}
 }
