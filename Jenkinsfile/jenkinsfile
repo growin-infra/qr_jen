@@ -1,16 +1,25 @@
 node {
-	stage ('ls test') {
-	    sh "ls /app/growin/was/"
+	stage ('whoami') {
 	    sh "whoami"
 	}
-    dir ('/svc/growin/was/tomcat/bin/') {
-	    stage ('tomcat restart') {
-		    sh "./shutdown.sh"
-			sh "sleep 5"
-		    sh "./startup.sh"
+    dir ('/downloads/maven') {
+	    stage ('git clone') {
+            git 'https://growin-infra:rmfhdnls1234@github.com/growin-infra/qr_jen.git'
+        }
+	}
+    dir ('/downloads/maven/qr_jen') {
+	    stage ('maven package') {
+		    sh "mvn package"
 		}
 	}
-    stage ('Deploy') {
-        sh "echo 'Deply tomcat'"
+    stage ('cp war') {
+        sh "cp /downloads/maven/qr_jen/target/qr_jen.war"
     }
+    dir ('/svc/growin/was/tomcat/bin') {
+	    stage ('tomcat restart') {
+	        sh "./shutdown.sh"
+	        sh "sleep 5"
+	        sh "./startup.sh"
+	    }
+	}
 }
