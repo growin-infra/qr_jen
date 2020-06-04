@@ -40,12 +40,10 @@ node {
 	    stage ('cp war') {
 	        sh "cp /downloads/maven/qr_jen/target/qr_jen.war /app/growin/was/growin11/"
 	    }
-	    dir ('/svc/growin/was/tomcat/bin') {
-		    stage ('tomcat restart') {
-		        sh "./shutdown.sh"
-		        sh "sleep 5"
-		        sh "./startup.sh"
-		    }
+	    stage ('tomcat restart') {
+	        sh "sudo systemctl stop tomcat_growin11"
+	        sh "sleep 5"
+	        sh "sudo systemctl start tomcat_growin11"
 		}
 
 	
