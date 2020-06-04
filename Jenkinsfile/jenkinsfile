@@ -1,6 +1,6 @@
 node {
     // schedule
-    properties([pipelineTriggers([cron('40 14 * * *')])])
+    //properties([pipelineTriggers([cron('40 14 * * *')])])
     
     // Global environments set
 	withEnv(["JAVA_HOME=${ tool 'jdk1.8.0_144' }", "PATH+MAVEN=${tool 'maven'}/bin:${env.JAVA_HOME}/bin"]) {
