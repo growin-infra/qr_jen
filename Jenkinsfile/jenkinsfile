@@ -1,4 +1,8 @@
 node {
+    // schedule
+    properties([pipelineTriggers([cron('40 14 * * *')])])
+    
+    // Global environments set
 	withEnv(["JAVA_HOME=${ tool 'jdk1.8.0_144' }", "PATH+MAVEN=${tool 'maven'}/bin:${env.JAVA_HOME}/bin"]) {
 	
 	    // Apache Maven related side notes:
@@ -45,7 +49,5 @@ node {
 	        sh "sleep 5"
 	        sh "sudo systemctl start tomcat_growin11"
 		}
-
-	
 	}
 }
