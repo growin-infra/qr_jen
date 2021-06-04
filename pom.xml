@@ -20,7 +20,7 @@
         <webjars-locator.version>0.39</webjars-locator.version>
         <bootstrap.version>4.4.1</bootstrap.version>
         <font-awesome.version>5.13.0</font-awesome.version>
-        <httpClient.version>4.5.12</httpClient.version>
+        <httpClient.version>4.5.13</httpClient.version>
         <zxing.version>3.4.0</zxing.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-lang3.version>3.10</commons-lang3.version>
